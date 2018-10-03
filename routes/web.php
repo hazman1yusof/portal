@@ -16,5 +16,5 @@ Route::get('/', function () {
 });
 
 Route::prefix('setup')->group(function () {
-    Route::get('users', "Setup\SetupController@show");
+    Route::get('carousel', "Setup\SetupCarousel@show");
 });
