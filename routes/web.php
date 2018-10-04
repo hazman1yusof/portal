@@ -17,4 +17,5 @@ Route::get('/', function () {
 
 Route::prefix('setup')->group(function () {
     Route::get('carousel', "Setup\SetupCarousel@show");
+    Route::get('carousel_save', "Setup\SetupCarousel@form");
 });
