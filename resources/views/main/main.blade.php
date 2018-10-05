@@ -18,27 +18,28 @@
   </head>
 
   <body>
+    <!-- header starts -->
+    <header class="blog-header py-3">
+      <div class="row"><span id="top-cert">Certified by Body of Institute of Visual Informatics (IVI)</span></div>
+      <div class="row flex-nowrap justify-content-between align-items-center">
+        <div class="col-md-4 offset-md-2"">
+          <img src="http://portal.test/img/logo-ukm-ivi-v1.fw_.png">
+        </div>
+      </div>
+    </header>
+    <!-- header ends -->
+
     <!-- Navbar starts -->
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-      <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="#">Features</a>
-        <a class="p-2 text-dark" href="#">Enterprise</a>
-        <a class="p-2 text-dark" href="#">Support</a>
-        <a class="p-2 text-dark" href="#">Pricing</a>
+    <div class="nav-scroller py-1 mb-2">
+      <nav class="nav d-flex justify-content-between" id="nav">
+        <a class="p-2 text-muted" href="#">Home</a>
+        <a class="p-2 text-muted" href="#">About</a>
+        <a class="p-2 text-muted" href="#">Vision</a>
+        <a class="p-2 text-muted" href="#">Mission</a>
+        <a class="p-2 text-muted" href="#">Staff</a>
+        <a class="p-2 text-muted" href="#">Course</a>
+        <a class="p-2 text-muted" href="#">Archive</a>
       </nav>
-      <h5 class="my-0 mr-md-auto font-weight-normal">Company name</h5>
-    </div>
-    <!-- Navbar ends -->
-    <!-- Navbar starts -->
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-      <!-- <h5 class="my-0 mr-md-auto font-weight-normal">Company name</h5> -->
-      <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="#">Features</a>
-        <a class="p-2 text-dark" href="#">Enterprise</a>
-        <a class="p-2 text-dark" href="#">Support</a>
-        <a class="p-2 text-dark" href="#">Pricing</a>
-      </nav>
-      <!-- <a class="btn btn-outline-primary" href="#">Sign up</a> -->
     </div>
     <!-- Navbar ends -->
 
