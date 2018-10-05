@@ -1,5 +1,7 @@
 @extends('setup.layout')
 
+@section('title', 'Carousel Setup')
+
 @section('body')
 	
 
@@ -8,9 +10,10 @@
             <tr>
                 <th>ID</th>
                 <th>Lineno</th>
-                <th>Image Path</th>
+                <th>Image</th>
                 <th>Image Text</th>
                 <th>Active</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -18,26 +21,32 @@
             <tr>
                 <td>{{$cara->id}}</td>
                 <td>{{$cara->lineno}}</td>
-                <td>{{$cara->carousel_image}}</td>
+                <td>{{env('APP_URL') .'thumbnail/'. $cara->carousel_path}}</td>
                 <td>{{$cara->carousel_text}}</td>
                 <td>{{$cara->active}}</td>
+                <td></td>
             </tr>
             @endforeach
         </tbody>
 	</table>
 
-	<div class="modal fade" id="modal_add" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
 	  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalCenterTitle">Add New Carousel Image</h5>
+	        <h5 class="modal-title" id="exampleModalCenterTitle">Carousel Image</h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
 	      </div>
 
 	      <div class="modal-body">
-	        <form method="GET" action="/setup/carousel_save">
+	        <form method="POST" action="/setup/carousel" enctype="multipart/form-data" id="formdata">
+	          <input type="hidden" name="oper" value="add">
+	          <input type="hidden" name="id">
+	          @csrf
+
+
 			  <div class="form-group">
 			    <label for="exampleInputEmail1">Image Path</label>
 			    <div class="input-group mb-3">
@@ -45,24 +54,24 @@
 				    <span class="input-group-text">Upload</span>
 				  </div>
 				  <div class="custom-file">
-				    <input type="file" class="custom-file-input" id="image_path" >
-				    <label class="custom-file-label" for="image_path">Choose file</label>
+				    <input type="file" class="custom-file-input" id="image_file" accept="image/*" name="image_file" required>
+				    <label class="custom-file-label" for="image_file">Choose file</label>
 				  </div>
 				</div>
 			  </div>
 
 			  <div class="form-group">
 			    <label for="carousel_text">Image Text</label>
-			    <input type="text" class="form-control" id="carousel_text" placeholder="Image Text">
+			    <input type="text" class="form-control" id="carousel_text" name="carousel_text" placeholder="Image Text">
 			  </div>
 
 			  <div class="form-group">
 			    <label for="lineno">Line Number</label>
-			    <input type="number" value="1" class="form-control" id="lineno" placeholder="Lineno">
+			    <input type="number" value="1" class="form-control" id="lineno" name="lineno" placeholder="Lineno" required>
 			  </div>
 
 			  <div class="form-group form-check">
-			    <input type="checkbox" class="form-check-input" id="active">
+			    <input type="checkbox" class="form-check-input" id="active" name="active" checked>
 			    <label class="form-check-label" for="active">Active</label>
 			  </div>
 
@@ -75,6 +84,7 @@
 	    </div>
 	  </div>
 	</div>
+
 @endsection
 
 
@@ -83,8 +93,8 @@
 @endsection
 
 @section('js')
-	<script src="{{ asset('js/carousel.js') }}"></script>
 	<script src="{{ asset('js/utility.js') }}"></script>
+	<script src="{{ asset('js/carousel.js') }}"></script>
 	<script src="{{ asset('asset/DataTables/datatables.min.js') }}"></script>
 	<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 

@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin Page</title>
+    <title>@yield('title')</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('js/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -15,6 +15,8 @@
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
     @yield('css')
+
+    <style type="text/css"> @yield('style')</style>
   </head>
 
   <body>
@@ -22,7 +24,8 @@
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Admin Page</a>
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-          <a class="nav-link" href="#">Sign out</a>
+          <a class="nav-link" href="\logout">
+          {{auth()->user()->username}} | Sign out</a>
         </li>
       </ul>
     </nav>

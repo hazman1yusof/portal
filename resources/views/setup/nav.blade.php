@@ -24,7 +24,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ Request::is('setup/carousel') ? 'active' : '' }}" href="#">
+            <a class="nav-link {{ Request::is('setup/carousel') ? 'active' : '' }}" href="/setup/carousel">
               <span data-feather="file"></span>
               Carousel Image
             </a>

@@ -13,9 +13,24 @@
 
 Route::get('/', function () {
     return view('main.main');
+})->name('home');
+
+Route::get('/home', function () {
+    return view('main.main');
 });
 
+Route::get('/login',"SessionController@view");
+Route::post('/login', "SessionController@login")->name('login');
+Route::get('/logout', "SessionController@destroy");
+
 Route::prefix('setup')->group(function () {
-    Route::get('carousel', "Setup\SetupCarousel@show");
-    Route::get('carousel_save', "Setup\SetupCarousel@form");
+    Route::get('carousel', "Setup\CarouselController@view");
+    Route::post('carousel', "Setup\CarouselController@form");
+});
+
+//change carousel image to small thumbnail size
+Route::get('/thumbnail/carousel/{image_path}', function($image_path){
+    $img = Image::make('uploads/carousel/'.$image_path)->resize(96, 96);
+
+	return $img->response();
 });
