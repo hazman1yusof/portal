@@ -15,7 +15,7 @@ class CarouselController extends Controller{
     }
 
     public function view(Request $request){ 
-        $caras = DB::table('carousel')->orderBy('id', 'desc')->get();
+        $caras = DB::table('carousel')->orderBy('lineno', 'desc')->orderBy('id', 'desc')->get();
         return view('setup/carousel',compact('caras'));
     }
 
