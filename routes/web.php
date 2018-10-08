@@ -10,19 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', 'MainController@database')->name('home');
 
-// Route::get('/', function () {
-//     return view('main.main');
-// })->name('home');
+Route::get('/', "MainController@view")->name('home');
 
-Route::get('/main2', function () {
-    return view('main.main2');
-});
+Route::get('/main2', 'MainController@database');
 
-Route::get('/home', function () {
-    return view('main.main');
-});
+Route::get('/home',"MainController@view");
 
 Route::get('/login',"SessionController@view");
 Route::post('/login', "SessionController@login")->name('login');

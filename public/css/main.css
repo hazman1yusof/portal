@@ -207,7 +207,7 @@
     text-shadow: 1px 1px #000000;
   }
   .blog-header {
-    background-image: linear-gradient(to top left,#0084e7,#00407f);
+    background-image: linear-gradient(to top left,#bc1913,#290302);
     box-shadow: inset 0 -8px 121px -50px #00407f;
   }
   .blog-header-logo {
@@ -215,7 +215,7 @@
     font-size: 2.25rem;
   }
   .row.flex-nowrap.justify-content-between.align-items-center {
-      margin: 0;
+    margin: 0;
   }
   .blog-header-logo:hover {
     text-decoration: none;
@@ -227,6 +227,10 @@
   #nav{
     width: 50%;
     margin: auto;
+  }
+
+  #nav a{
+    color: #310202;
   }
 
   .nav-scroller {
@@ -258,56 +262,68 @@
   }
   /* end nav */
 
-  /* LOGIN & SLIDER SECTION
-  -------------------------------------------------- */
-  
-  .form-sec-outer {
-    padding-left: 0px; 
-    padding-right: 0px; 
+  #contain-div{
+    /*background: url(http://portal.oo/uploads/logo/UKM_01.jpg) no-repeat center center fixed;*/
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    box-shadow: inset 0px 0px 5px 8px #ffffff
   }
 
-  .form-sec-inner {
-    padding-left: 20px; 
-    padding-right: 20px; 
-    padding-bottom: 0px;
-    height: 512px;
+  .row-para{
+    background:rgba(255,255,255,0.7);
   }
 
-  .form-header {
-    padding-top: 15px;
+  .row-card{
+    background: url(footer_bg.png);
+    border-top: 1px solid #3e3e3e;
   }
 
-  input[type=email], input[type=password] {
+  .carousel-3d-slide{
+    border-radius: 10px !important;
+    box-shadow: -4px 6px 6px 4px #888888;
+  }
+
+  .blog-main{
+    border-radius: .25rem;
+    border: 1px solid #cccccc;
+    background:rgba(255,255,255,0.9);
+  }
+
+  .blog-sidebar{
+    border-radius: .25rem;
+    border: 1px solid #cccccc;
+    background:rgba(255,255,255,0.9);
+  }
+
+  .card-body{
+    padding: .75rem;
+  }
+  .form-signin {
     width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
+    max-width: 330px;
+    margin: auto;
+  }
+  .form-signin .checkbox {
+    font-weight: 400;
+  }
+  .form-signin .form-control {
+    position: relative;
     box-sizing: border-box;
+    height: auto;
+    font-size: 16px;
   }
-
-  .login_button {
-    text-align: center;
+  .form-signin .form-control:focus {
+    z-index: 2;
   }
-
-  .slider-sec-outer {
-    padding-left: 0px;
-    padding-right: 0px; 
-    padding-top: 30px;
-    margin: 0%;
+  .form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
   }
-
-  .slider-sec-inner {
-    margin: 0%;
+  .form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
   }
-
-  /* CONTAINER MAIN
-  -------------------------------------------------- */
-  
-  .con-sec {
-    padding-top: 50px;
-  }
-  
-  
-  
-  

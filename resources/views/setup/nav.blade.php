@@ -36,7 +36,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ Request::is('setup/module') ? 'active' : '' }}" href="#">
+            <a class="nav-link {{ Request::is('setup/module') ? 'active' : '' }}" href="/setup/module">
               <span data-feather="bar-chart-2"></span>
               Module
             </a>
