@@ -40,7 +40,7 @@
       <div class="row"><span id="top-cert">Certified by Body of Institute of Visual Informatics (IVI)</span></div>
       <div class="row flex-nowrap justify-content-between align-items-center">
         <div class="col-md-4 offset-md-2"">
-          <img src="http://portal.oo/uploads/logo/logo_ukm_ivi.png">
+          <img src="{{env('APP_URL')}}uploads/logo/logo_ukm_ivi.png">
         </div>
       </div>
     </header>
@@ -71,7 +71,7 @@
                      :inverse-scaling="slideScaling">
             @foreach($carousels as $carousel)
               <slide :index="{{$loop->index}}">
-                <img src="http://portal.oo/uploads/{{$carousel->carousel_path}}" style="width: 100%;height: 100%;object-fit: fill;">
+                <img src="{{env('APP_URL')}}uploads/{{$carousel->carousel_path}}" style="width: 100%;height: 100%;object-fit: fill;">
               </slide>
             @endforeach
         </carousel-3d>

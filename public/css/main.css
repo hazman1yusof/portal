@@ -150,7 +150,7 @@
   }
 
   .row-card{
-    background: url(http://portal.oo/uploads/logo/footer_bg.png);
+    background: url(footer_bg.png);
     border-top: 1px solid #3e3e3e;
   }
 
@@ -161,13 +161,13 @@
 
   .blog-main{
     border-radius: .25rem;
-    border: 1px solid #3e3e3e;
+    border: 1px solid #cccccc;
     background:rgba(255,255,255,0.9);
   }
 
   .blog-sidebar{
     border-radius: .25rem;
-    border: 1px solid #3e3e3e;
+    border: 1px solid #cccccc;
     background:rgba(255,255,255,0.9);
   }
 
