@@ -1,5 +1,5 @@
 /*
-SQLyog Community v12.5.0 (32 bit)
+SQLyog Community v12.5.1 (64 bit)
 MySQL - 5.7.19 : Database - myportal
 *********************************************************************
 */
@@ -40,7 +40,16 @@ CREATE TABLE `carousel` (
   `carousel_text` varchar(30) DEFAULT NULL,
   `active` varchar(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+
+/*Table structure for table `carousel_img` */
+
+DROP TABLE IF EXISTS `carousel_img`;
+
+CREATE TABLE `carousel_img` (
+  `carousel_image` varchar(30) DEFAULT NULL,
+  `carousel_text` varchar(30) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Table structure for table `info_detail` */
 
@@ -74,10 +83,12 @@ CREATE TABLE `main_page` (
   `links_title` varchar(30) DEFAULT NULL,
   `links_list` text,
   `contact_title` varchar(20) DEFAULT NULL,
-  `contact_address` varchar(100) DEFAULT NULL,
+  `contact_address` varchar(255) DEFAULT NULL,
   `contact_tel` varchar(15) DEFAULT NULL,
   `contact_fax` varchar(15) DEFAULT NULL,
-  `contact_whatsapp` varchar(15) DEFAULT NULL
+  `contact_whatsapp` varchar(15) DEFAULT NULL,
+  `footer1` varchar(100) DEFAULT NULL,
+  `footer2` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Table structure for table `module_master` */
@@ -90,7 +101,7 @@ CREATE TABLE `module_master` (
   `module_name` varchar(30) DEFAULT NULL,
   `module_summary` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 /*Table structure for table `socmed` */
 
@@ -102,7 +113,16 @@ CREATE TABLE `socmed` (
   `socmed_desc` text,
   `socmed_link` varchar(122) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+/*Table structure for table `socmed_detail` */
+
+DROP TABLE IF EXISTS `socmed_detail`;
+
+CREATE TABLE `socmed_detail` (
+  `socmed_name` varchar(30) DEFAULT NULL,
+  `socmed_desc` text
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Table structure for table `users` */
 
@@ -116,7 +136,7 @@ CREATE TABLE `users` (
   `status` varchar(11) DEFAULT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
