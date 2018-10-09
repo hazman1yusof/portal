@@ -1,5 +1,5 @@
 /*
-SQLyog Community v12.5.1 (64 bit)
+SQLyog Community v12.5.0 (32 bit)
 MySQL - 5.7.19 : Database - myportal
 *********************************************************************
 */
@@ -21,19 +21,21 @@ USE `myportal`;
 DROP TABLE IF EXISTS `activity_detail`;
 
 CREATE TABLE `activity_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `activity_date` date DEFAULT NULL,
-  `activity_name` text,
-  `activity_time` varchar(10) DEFAULT NULL,
+  `activity_name` varchar(222) DEFAULT NULL,
+  `activity_time` time DEFAULT NULL,
   `activity_venue` varchar(20) DEFAULT NULL,
-  `activity_image` varchar(30) DEFAULT NULL,
-  `activity_desc` text
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `activity_image` varchar(255) DEFAULT NULL,
+  `activity_desc` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `activity_detail` */
 
-insert  into `activity_detail`(`activity_date`,`activity_name`,`activity_time`,`activity_venue`,`activity_image`,`activity_desc`) values 
-('2018-10-01','Activity 1','9.00 am','Venue 1','img/info.jpg','Description here'),
-('2018-10-03','Activity 2','9.00 am','Venue 2','img/info.jpg','Description here');
+insert  into `activity_detail`(`id`,`activity_date`,`activity_name`,`activity_time`,`activity_venue`,`activity_image`,`activity_desc`) values 
+(1,'2018-10-01','Activity 1','00:12:00','Venue 1','activity/pjmVvekLVRh49hMEArQEPZQzrEPjQ3dbqMXlLOUo.png','Description here dsasdsad'),
+(2,'2018-10-03','Activity 2','00:00:00','Venue 2','activity/98AA9TSeKqXtQbBbW7mKRhU4eBvh1IV2YGAKSFrW.png','Description here');
 
 /*Table structure for table `carousel` */
 
@@ -51,11 +53,11 @@ CREATE TABLE `carousel` (
 /*Data for the table `carousel` */
 
 insert  into `carousel`(`id`,`lineno`,`carousel_path`,`carousel_text`,`active`) values 
-(8,1,'carousel/weuz7WK4UiwyifFAdfZmGps0jpA8Ol8nTOAwLf1E.jpeg',NULL,'1'),
-(9,2,'carousel/iYZBS5GVFOIVdzCQrpu8nMbVwPpglinsn0zLG90g.jpeg',NULL,'1'),
-(10,3,'carousel/rrz6pTQ2svk7yGrFOF3nuHvLCXOKwTddNBaYQeqJ.jpeg',NULL,'1'),
-(11,4,'carousel/QVBh1mM7AEtbumoieSZrJXJRj5TmXcXUK26V1hv8.jpeg',NULL,'1'),
-(12,5,'carousel/omIZw8imMErmwJo2gMiazvyBpGbBYiFK2gNgStL6.jpeg',NULL,'1');
+(8,1,'carousel/8EiFwVfvUxU8v7h8sfHuSNsc976pk0nppOfGoMKv.jpeg',NULL,'1'),
+(9,2,'carousel/zvBgeQ83E1GjNFTDwlRGnW4RpGtt71oEbw3VoFGt.jpeg',NULL,'1'),
+(10,3,'carousel/q4bwbWLogx5OxtgstVWOwlKXBq7khGDBpCX6O8Rx.jpeg',NULL,'1'),
+(11,4,'carousel/XBWxyVYmbwLpgq1v49B6cppuq5MBm6fzYQN4hand.jpeg',NULL,'1'),
+(12,5,'carousel/lmJGrEsCaPLrsF0WOudNnYYWB1dHxPMRwRJ2UVkC.jpeg',NULL,'1');
 
 /*Table structure for table `carousel_img` */
 
@@ -77,17 +79,19 @@ insert  into `carousel_img`(`carousel_image`,`carousel_text`) values
 DROP TABLE IF EXISTS `info_detail`;
 
 CREATE TABLE `info_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `info_name` varchar(30) DEFAULT NULL,
   `info_date` date DEFAULT NULL,
   `info_content` text,
-  `info_image` varchar(30) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `info_image` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `info_detail` */
 
-insert  into `info_detail`(`info_name`,`info_date`,`info_content`,`info_image`) values 
-('Info 1','2018-10-02','Content here','img/info.jpg'),
-('Info 2','2018-10-11','Content here','img/info.jpg');
+insert  into `info_detail`(`id`,`info_name`,`info_date`,`info_content`,`info_image`) values 
+(1,'Info 1','2018-10-02','Curabitur quam augue, sollicitudin id risus eu, porttitor efficitur odio. Nunc malesuada enim eget erat vehicula cursus. Etiam gravida dolor eget lorem commodo viverra ut non est. Fusce facilisis auctor turpis. Pellentesque erat nisl, luctus vel ante in, vestibulum feugiat ligula. Sed sollicitudin lacinia eros vitae sagittis. Suspendisse nec mollis mauris, eu auctor mi. Etiam felis nunc, elementum eu ex ac, mollis tempor tortor. Proin non arcu vel arcu fermentum ultrices.','info/eCYTwENm2locbWKkXNFGE9AdP1iU4PnViXFgLp1P.png'),
+(2,'Info 2','2018-10-03','Curabitur quam augue, sollicitudin id risus eu, porttitor efficitur odio. Nunc malesuada enim eget erat vehicula cursus. Etiam gravida dolor eget lorem commodo viverra ut non est. Fusce facilisis auctor turpis. Pellentesque erat nisl, luctus vel ante in, vestibulum feugiat ligula. Sed sollicitudin lacinia eros vitae sagittis. Suspendisse nec mollis mauris, eu auctor mi. Etiam felis nunc, elementum eu ex ac, mollis tempor tortor. Proin non arcu vel arcu fermentum ultrices.','info/ZVXffbTBD1Fdl7Boa5RGyxWEGo3HUB1t8hMkWKL9.jpeg');
 
 /*Table structure for table `main_page` */
 
@@ -138,10 +142,10 @@ CREATE TABLE `module_master` (
 /*Data for the table `module_master` */
 
 insert  into `module_master`(`id`,`module_image`,`module_name`,`module_summary`) values 
-(5,'module/06DeGcMF82eSSSxyHu1K7B9QNtUwDNQfO5xmW1fU.jpeg','Module 1','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi placerat faucibus lorem, vel rutrum erat condimentum vel. Nullam convallis facilisis cursus. Nullam pellentesque augue magna, a elementum sapien mattis vitae. Cras commodo accumsan ligula ac ornare. Proin pharetra, massa sed semper convallis, nulla turpis laoreet augue, sed hendrerit ante odio sed odio. Nullam vestibulum cursus dui eu gravida. In hac habitasse platea dictumst. Aenean a nibh ex. Vestibulum vitae nibh massa. Vestibulum laoreet porttitor massa sed mollis.'),
-(6,'module/HguIICz2VdslBIZa4SSl35FRXw8JW4mbuaS4qsV3.jpeg','Module 2','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi placerat faucibus lorem, vel rutrum erat condimentum vel. Nullam convallis facilisis cursus. Nullam pellentesque augue magna, a elementum sapien mattis vitae. Cras commodo accumsan ligula ac ornare. Proin pharetra, massa sed semper convallis, nulla turpis laoreet augue, sed hendrerit ante odio sed odio. Nullam vestibulum cursus dui eu gravida. In hac habitasse platea dictumst. Aenean a nibh ex. Vestibulum vitae nibh massa. Vestibulum laoreet porttitor massa sed mollis.'),
-(7,'module/JctYsLXjRvuVSk7Ciq5bII3TSa5iVQz3FJSC0egO.jpeg','Module 3','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi placerat faucibus lorem, vel rutrum erat condimentum vel. Nullam convallis facilisis cursus. Nullam pellentesque augue magna, a elementum sapien mattis vitae. Cras commodo accumsan ligula ac ornare. Proin pharetra, massa sed semper convallis, nulla turpis laoreet augue, sed hendrerit ante odio sed odio. Nullam vestibulum cursus dui eu gravida. In hac habitasse platea dictumst. Aenean a nibh ex. Vestibulum vitae nibh massa. Vestibulum laoreet porttitor massa sed mollis.'),
-(8,'module/UHokUgdgX21IvuSZpAHT496cotrcb7ht7wPEnaHy.jpeg','Module 4','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi placerat faucibus lorem, vel rutrum erat condimentum vel. Nullam convallis facilisis cursus. Nullam pellentesque augue magna, a elementum sapien mattis vitae. Cras commodo accumsan ligula ac ornare. Proin pharetra, massa sed semper convallis, nulla turpis laoreet augue, sed hendrerit ante odio sed odio. Nullam vestibulum cursus dui eu gravida. In hac habitasse platea dictumst. Aenean a nibh ex. Vestibulum vitae nibh massa. Vestibulum laoreet porttitor massa sed mollis.');
+(5,'module/F0y2niTFc8gkEIYZUcWMATnCi17NxNnNIsIVAYrL.jpeg','Module 1','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi placerat faucibus lorem, vel rutrum erat condimentum vel. Nullam convallis facilisis cursus. Nullam pellentesque augue magna, a elementum sapien mattis vitae. Cras commodo accumsan ligula ac ornare. Proin pharetra, massa sed semper convallis, nulla turpis laoreet augue, sed hendrerit ante odio sed odio. Nullam vestibulum cursus dui eu gravida. In hac habitasse platea dictumst. Aenean a nibh ex. Vestibulum vitae nibh massa. Vestibulum laoreet porttitor massa sed mollis.'),
+(6,'module/IUp8Y5s3VG3d9lr0qfgvChN3IkmuR5QbYk239bVQ.jpeg','Module 2','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi placerat faucibus lorem, vel rutrum erat condimentum vel. Nullam convallis facilisis cursus. Nullam pellentesque augue magna, a elementum sapien mattis vitae. Cras commodo accumsan ligula ac ornare. Proin pharetra, massa sed semper convallis, nulla turpis laoreet augue, sed hendrerit ante odio sed odio. Nullam vestibulum cursus dui eu gravida. In hac habitasse platea dictumst. Aenean a nibh ex. Vestibulum vitae nibh massa. Vestibulum laoreet porttitor massa sed mollis.'),
+(7,'module/RE5GjvcXEV5uF8R9CozRhPPKWUBX3whFpACExzVs.png','Module 3','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi placerat faucibus lorem, vel rutrum erat condimentum vel. Nullam convallis facilisis cursus. Nullam pellentesque augue magna, a elementum sapien mattis vitae. Cras commodo accumsan ligula ac ornare. Proin pharetra, massa sed semper convallis, nulla turpis laoreet augue, sed hendrerit ante odio sed odio. Nullam vestibulum cursus dui eu gravida. In hac habitasse platea dictumst. Aenean a nibh ex. Vestibulum vitae nibh massa. Vestibulum laoreet porttitor massa sed mollis.'),
+(8,'module/LKlH7YTc9CBWK9Z0rVBU1nkdUKFvQlyiKCvKM3uU.png','Module 4','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi placerat faucibus lorem, vel rutrum erat condimentum vel. Nullam convallis facilisis cursus. Nullam pellentesque augue magna, a elementum sapien mattis vitae. Cras commodo accumsan ligula ac ornare. Proin pharetra, massa sed semper convallis, nulla turpis laoreet augue, sed hendrerit ante odio sed odio. Nullam vestibulum cursus dui eu gravida. In hac habitasse platea dictumst. Aenean a nibh ex. Vestibulum vitae nibh massa. Vestibulum laoreet porttitor massa sed mollis.');
 
 /*Table structure for table `socmed` */
 
