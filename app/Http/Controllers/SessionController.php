@@ -26,7 +26,7 @@ class SessionController extends Controller
     	if($user){
     		Auth::login($user,!empty($request->remember_me));
 
-    		return redirect('/setup/carousel');
+    		return redirect('/setup/dashboard');
     	}else{
     		return back();
     	}

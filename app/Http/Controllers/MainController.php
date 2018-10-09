@@ -36,8 +36,11 @@ class MainController extends Controller
          'activity_title', 'activity', 'info_title', 'info', 'social_media', 'socmed_detail', 'about_title', 'about_info', 'links_title', 
          'links_list', 'contact_title', 'contact_address', 'contact_tel', 'contact_fax', 'contact_whatsapp'));
     }  
+    
     public function view(Request $request){ 
+        $modules = DB::table('module_master')->orderBy('id', 'asc')->get();
         $carousels = DB::table('carousel')->orderBy('lineno', 'asc')->orderBy('id', 'asc')->get();
-        return view('main/main',compact('carousels'));
+        $facebook = DB::table('socmed')->where('socmed_name','=','facebook')->first();
+        return view('main/main',compact('carousels','modules','facebook'));
     }
 }

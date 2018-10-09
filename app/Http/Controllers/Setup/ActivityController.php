@@ -9,7 +9,7 @@ use Storage;
 use Image;
 use File;
 
-class CarouselController extends Controller{
+class ActivityController extends Controller{
 	public function __construct(){
         $this->middleware('auth');
     }

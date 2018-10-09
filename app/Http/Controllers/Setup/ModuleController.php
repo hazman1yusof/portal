@@ -9,14 +9,14 @@ use Storage;
 use Image;
 use File;
 
-class CarouselController extends Controller{
+class ModuleController extends Controller{
 	public function __construct(){
         $this->middleware('auth');
     }
 
     public function view(Request $request){ 
-        $caras = DB::table('carousel')->orderBy('lineno', 'desc')->orderBy('id', 'desc')->get();
-        return view('setup/carousel',compact('caras'));
+        $modules = DB::table('module_master')->orderBy('id', 'desc')->get();
+        return view('setup/module',compact('modules'));
     }
 
     public function form(Request $request){
@@ -36,14 +36,13 @@ class CarouselController extends Controller{
         DB::beginTransaction();
         try { 
 
-        	$carousel_path = $request->file('image_file')->store('carousel', 'public_uploads');
+        	$module_image = $request->file('image_file')->store('module', 'public_uploads');
 
-        	DB::table('carousel')
+        	DB::table('module_master')
         		->insert([
-        			'lineno' => $request->lineno,
-        			'carousel_path' => $carousel_path,
-        			'carousel_text' => $request->carousel_text,
-        			'active' => !empty($request->active)
+        			'module_image' => $module_image,
+        			'module_name' => $request->module_name,
+                    'module_summary' => $request->module_summary
         		]);
 
         	DB::commit();
@@ -63,26 +62,24 @@ class CarouselController extends Controller{
     	DB::beginTransaction();
         try { 
 
-        	$carousel = DB::table('carousel')->where('id','=',$request->id);
+        	$module = DB::table('module_master')->where('id','=',$request->id);
 
         	if(!empty($request->file('image_file'))){
-				File::delete('uploads/'.$carousel->first()->carousel_path);
-        		$carousel_path = $request->file('image_file')->store('carousel', 'public_uploads');
+				File::delete('uploads/'.$module->first()->module_image);
+        		$module_image = $request->file('image_file')->store('module', 'public_uploads');
 
-				$carousel
+				$module
 	        		->update([
-	        			'lineno' => $request->lineno,
-	        			'carousel_path' => $carousel_path,
-	        			'carousel_text' => $request->carousel_text,
-	        			'active' => !empty($request->active)
+	        			'module_image' => $module_image,
+                        'module_name' => $request->module_name,
+	        			'module_summary' => $request->module_summary
 	        		]);
         	}else{
-        		$carousel
-	        		->update([
-	        			'lineno' => $request->lineno,
-	        			'carousel_text' => $request->carousel_text,
-	        			'active' => !empty($request->active)
-	        		]);
+        		$module
+                    ->update([
+                        'module_name' => $request->module_name,
+                        'module_summary' => $request->module_summary
+                    ]);
         	}
 
         	DB::commit();
@@ -101,12 +98,12 @@ class CarouselController extends Controller{
     	DB::beginTransaction();
         try { 
 
-        	$carousel = DB::table('carousel')
+        	$module = DB::table('module_master')
 	    					->where('id','=',$request->id);
 
-			File::delete('uploads/'.$carousel->first()->carousel_path);
+			File::delete('uploads/'.$module->first()->module_image);
 
-    		$carousel->delete();
+    		$module->delete();
 
         	DB::commit();
 

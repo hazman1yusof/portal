@@ -9,14 +9,14 @@ use Storage;
 use Image;
 use File;
 
-class CarouselController extends Controller{
+class UsersController extends Controller{
 	public function __construct(){
         $this->middleware('auth');
     }
 
     public function view(Request $request){ 
-        $caras = DB::table('carousel')->orderBy('lineno', 'desc')->orderBy('id', 'desc')->get();
-        return view('setup/carousel',compact('caras'));
+        $users = DB::table('users')->orderBy('id', 'desc')->get();
+        return view('setup/users',compact('users'));
     }
 
     public function form(Request $request){
@@ -36,14 +36,11 @@ class CarouselController extends Controller{
         DB::beginTransaction();
         try { 
 
-        	$carousel_path = $request->file('image_file')->store('carousel', 'public_uploads');
-
-        	DB::table('carousel')
+        	DB::table('users')
         		->insert([
-        			'lineno' => $request->lineno,
-        			'carousel_path' => $carousel_path,
-        			'carousel_text' => $request->carousel_text,
-        			'active' => !empty($request->active)
+        			'username' => $request->username,
+        			'password' => $request->password,
+        			'role' => $request->role
         		]);
 
         	DB::commit();
@@ -63,27 +60,14 @@ class CarouselController extends Controller{
     	DB::beginTransaction();
         try { 
 
-        	$carousel = DB::table('carousel')->where('id','=',$request->id);
+        	$user = DB::table('users')->where('id','=',$request->id);
 
-        	if(!empty($request->file('image_file'))){
-				File::delete('uploads/'.$carousel->first()->carousel_path);
-        		$carousel_path = $request->file('image_file')->store('carousel', 'public_uploads');
-
-				$carousel
-	        		->update([
-	        			'lineno' => $request->lineno,
-	        			'carousel_path' => $carousel_path,
-	        			'carousel_text' => $request->carousel_text,
-	        			'active' => !empty($request->active)
-	        		]);
-        	}else{
-        		$carousel
-	        		->update([
-	        			'lineno' => $request->lineno,
-	        			'carousel_text' => $request->carousel_text,
-	        			'active' => !empty($request->active)
-	        		]);
-        	}
+    		$user
+        		->update([
+                    'username' => $request->username,
+                    'password' => $request->password,
+                    'role' => $request->role
+        		]);
 
         	DB::commit();
 
@@ -101,12 +85,10 @@ class CarouselController extends Controller{
     	DB::beginTransaction();
         try { 
 
-        	$carousel = DB::table('carousel')
+        	$user = DB::table('users')
 	    					->where('id','=',$request->id);
 
-			File::delete('uploads/'.$carousel->first()->carousel_path);
-
-    		$carousel->delete();
+    		$user->delete();
 
         	DB::commit();
 

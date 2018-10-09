@@ -45,8 +45,7 @@
 	          <input type="hidden" name="oper" value="add">
 	          <input type="hidden" name="id">
 	          @csrf
-
-
+	          
 			  <div class="form-group">
 			    <label for="exampleInputEmail1">Image Path</label>
 			    <div class="input-group mb-3">
@@ -75,10 +74,11 @@
 			    <label class="form-check-label" for="active">Active</label>
 			  </div>
 
-
-		      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		      <button type="submit" class="btn btn-primary" id="add_save">Save changes</button>
-
+			  <div class="float-right">
+	            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	            <button type="submit" class="btn btn-primary" id="add_save">Save changes</button>
+	  	  	  </div>
+	  	  	  
 			</form>
 	      </div>
 	    </div>

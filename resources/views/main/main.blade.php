@@ -19,27 +19,33 @@
 
   <body>
     <!-- header starts -->
-    <div class="card m-3 d-none d-md-block" style="width: 15rem; position: absolute; z-index: 10; right: 10px; top: 30px">
-      <div class="card-body">
-        <form class="form-signin">
-          <input type="email" id="inputEmail" class="form-control" placeholder="Username" required>
-          <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+
+    @guest
+    <div class="card m-3 d-none d-md-block login-card">
+      <div class="card-body" >
+        <form class="form-signin" method="POST" action="/login">
+          @csrf
+          <input type="text" id="username" name="username" class="form-control form-control-sm" placeholder="Username" required>
+          <input type="password" id="inputPassword" name="password" class="form-control form-control-sm" placeholder="Password" required style="margin-bottom: 5px">
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="autoSizingCheck2">
             <label class="form-check-label" for="autoSizingCheck2">
               Remember me
             </label>
           </div>
-          <button class="btn btn-sm btn-primary btn-block" type="submit">Log in</button>
-          <a class="btn btn-block p-0" href="#">Sign up</a>
+          <div class="btn-group btn-group-sm d-flex" role="group" aria-label="Basic example">
+            <button class="btn btn-primary w-100" type="submit">Log in</button>
+            <button type="button" class="btn btn-secondary w-100">Sign up</button>
+          </div>
         </form>
       </div>
     </div>
+    @endguest
 
     <header class="blog-header py-3">
       <div class="row"><span id="top-cert">Certified by Body of Institute of Visual Informatics (IVI)</span></div>
       <div class="row flex-nowrap justify-content-between align-items-center">
-        <div class="col-md-4 offset-md-2"">
+        <div class="col-md-4 offset-md-3"">
           <img src="{{env('APP_URL')}}uploads/logo/logo_ukm_ivi.png">
         </div>
       </div>
@@ -47,15 +53,15 @@
     <!-- header ends -->
 
     <!-- Navbar starts -->
-    <div class="nav-scroller py-1 mb-2">
+    <div class="nav-scroller py-1 mb-2 sticky-top">
       <nav class="nav d-flex justify-content-between" id="nav">
         <a class="p-2 btn btn-warning" href="#">Home</a>
         <a class="p-2 btn" href="#">About</a>
         <a class="p-2 btn" href="#">Vision</a>
         <a class="p-2 btn" href="#">Mission</a>
         <a class="p-2 btn" href="#">Staff</a>
-        <a class="p-2 btn" href="#">Course</a>
-        <a class="p-2 btn" href="#">Archive</a>
+        <a class="p-2 btn" href="#">Module</a>
+        @auth<a class="p-2 btn btn-secondary" href="/setup/dashboard" style="color: white">User | {{auth()->user()->username}}</a>@endauth
       </nav>
     </div>
     <!-- Navbar ends -->
@@ -83,34 +89,16 @@
     <div class="row row-card py-4 m-0">
       <div class="container">
         <div class="card-deck text-center">
+          @foreach($modules as $module)
           <div class="card shadow-sm">
-            <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" style="height:240px;max-width:400px" alt="Card image cap">
+            <img class="card-img-top" src="{{env('APP_URL')}}uploads/{{$module->module_image}}" style="height:240px;max-width:400px" alt="Card image cap">
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <h3 class="card-title">{{$module->module_name}}</h3>
+              <p class="card-text">{{$module->module_summary}}</p>
+              <a href="">Find more info</a>
             </div>
           </div>
-          <div class="card shadow-sm">
-            <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" style="height:240px;max-width:400px" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-          </div>
-          <div class="card shadow-sm">
-            <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" style="height:240px;max-width:400px" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-          </div>
-          <div class="card shadow-sm">
-            <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" style="height:240px;max-width:400px" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-          </div>
+          @endforeach
         </div> 
       </div>
     </div>
@@ -195,24 +183,24 @@
                 <p></p><p></p>
                 <h4 class="pb-3 mb-4 font-italic border-bottom">Social Media</h4>
                 <div class="tab">
-                  <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">Facebook</button>
-                  <button class="tablinks" onclick="openCity(event, 'Paris')">Twitter</button>
-                  <button class="tablinks" onclick="openCity(event, 'Tokyo')">DLL</button>
+                  <button class="tablinks" onclick="openCity(event, 'fb')" id="defaultOpen">Facebook</button>
+                  <button class="tablinks" onclick="openCity(event, 'tw')">Twitter</button>
+                  <button class="tablinks" onclick="openCity(event, 'ins')">Instagram</button>
                 </div>
-                <div id="London" class="tabcontent">
+                <div id="fb" class="tabcontent">
                   <div class="container">
-                    <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FMasjidBBSB&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" 
-                      width="250" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media">
-                    </iframe>
+                    {!! !empty($facebook)?$facebook->socmed_desc:''!!}
                   </div>
                 </div>
-                <div id="Paris" class="tabcontent">
+                <div id="tw" class="tabcontent">
                   <h3>Twitter</h3>
                   <p>Twitter account here.</p> 
+                  {!! !empty($twitter)?$twitter->socmed_desc:''!!}
                 </div>
-                <div id="Tokyo" class="tabcontent">
-                  <h3>DLL</h3>
+                <div id="ins" class="tabcontent">
+                  <h3>Instagram</h3>
                   <p>Others.</p>
+                  {!! !empty($instagram)?$instagram->socmed_desc:''!!}
                 </div>
               </div>
             </aside><!-- /.blog-sidebar -->

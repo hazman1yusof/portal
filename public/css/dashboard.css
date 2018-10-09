@@ -38,6 +38,10 @@ body {
   }
 }
 
+a.nav-link {
+    color: #9E9E9E;
+}
+
 .sidebar .nav-link {
   font-weight: 500;
   color: #333;

@@ -4,7 +4,7 @@
 
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link {{ Request::is('setup/dashboard') ? 'active' : '' }}" href="/setup/dashboard">
               <span data-feather="home"></span>
               Dashboard
             </a>
@@ -18,31 +18,31 @@
 
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link {{ Request::is('setup/users') ? 'active' : '' }}" href="#">
+            <a class="nav-link {{ Request::is('setup/users') ? 'active' : '' }}" href="/setup/users">
               <span data-feather="users"></span>
               Users
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link {{ Request::is('setup/carousel') ? 'active' : '' }}" href="/setup/carousel">
-              <span data-feather="file"></span>
+              <span data-feather="airplay"></span>
               Carousel Image
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ Request::is('setup/main_page') ? 'active' : '' }}" href="#">
-              <span data-feather="shopping-cart"></span>
+            <a class="nav-link {{ Request::is('setup/mainpage') ? 'active' : '' }}" href="/setup/mainpage">
+              <span data-feather="file"></span>
               Main Page
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link {{ Request::is('setup/module') ? 'active' : '' }}" href="/setup/module">
-              <span data-feather="bar-chart-2"></span>
+              <span data-feather="codepen"></span>
               Module
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ Request::is('setup/activity') ? 'active' : '' }}" href="#">
+            <a class="nav-link {{ Request::is('setup/activity') ? 'active' : '' }}" href="/setup/activity">
               <span data-feather="layers"></span>
               Activity
             </a>

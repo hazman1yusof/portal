@@ -9,14 +9,14 @@ use Storage;
 use Image;
 use File;
 
-class CarouselController extends Controller{
+class MainpageController extends Controller{
 	public function __construct(){
         $this->middleware('auth');
     }
 
     public function view(Request $request){ 
         $caras = DB::table('carousel')->orderBy('lineno', 'desc')->orderBy('id', 'desc')->get();
-        return view('setup/carousel',compact('caras'));
+        return view('setup/mainpage',compact('caras'));
     }
 
     public function form(Request $request){

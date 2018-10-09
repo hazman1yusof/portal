@@ -7,15 +7,14 @@ $(document).ready(function() {
         order: [[ 0, 'desc' ]],
         columnDefs: [
         	{ name: 'id', targets: 0, width: "10%"},
-        	{ name: 'lineno', targets: 1, width: "10%"},
-		    { name: 'carousel_path', targets: 2,
+		    { name: 'module_image', targets: 1,
 		      render: function(data, type, row, meta) {
 		        return '<img src="'+data+'">'
 		      }
 		    },
-        	{ name: 'carousel_text', targets: 3, width: "40%"},
-        	{ name: 'active', targets: 4, width: "10%"},
-        	{ name: 'action', targets: 5, width: "10%", "data": null,
+        	{ name: 'madule_name', targets: 2, width: "20%"},
+        	{ name: 'madule_summary', targets: 3, width: "40%"},
+        	{ name: 'action', targets: 4, width: "10%", "data": null,
 		      render: function(data, type, row, meta) {
 		        return `
 		        	<div class="btn-group">
@@ -50,7 +49,6 @@ function add_form(){
 function edit_form(id,index){
 	emptyFormdata('#formdata');
 	populateFormdata('#formdata',table.rows(index).data().toArray()[0]);
-	$('#active').prop('checked',parseInt(rowdata[4]));
     $("#formdata input[name='id']").val(id);
     $("#formdata input[name='oper']").val('edit');
     $("#image_file").prop('required',false);
@@ -66,8 +64,7 @@ function delete_form(id){
 }
 
 function populateFormdata(form,rowdata){
-	$('#image_file').next('.custom-file-label').html(rowdata[2]);
-	$('#carousel_text').val(rowdata[3]);
-	$('#lineno').val(rowdata[1]);
-	$('#active').prop('checked',parseInt(rowdata[4]));
+	$('#image_file').next('.custom-file-label').html(rowdata[1]);
+	$('#module_name').val(rowdata[2]);
+	$('#module_summary').val(rowdata[3]);
 }

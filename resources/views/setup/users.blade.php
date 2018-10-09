@@ -1,6 +1,6 @@
 @extends('setup.layout')
 
-@section('title', 'Module Setup')
+@section('title', 'User Setup')
 
 @section('body')
 	
@@ -9,19 +9,19 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Module Image</th>
-                <th>Module Name</th>
-                <th>Module Summary</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Role</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($modules as $module)
+            @foreach($users as $user)
             <tr>
-                <td>{{$module->id}}</td>
-                <td>{{env('APP_URL') .'thumbnail/'. $module->module_image}}</td>
-                <td>{{$module->module_name}}</td>
-                <td>{{$module->module_summary}}</td>
+                <td>{{$user->id}}</td>
+                <td>{{$user->username}}</td>
+                <td>{{$user->password}}</td>
+                <td>{{$user->role}}</td>
                 <td></td>
             </tr>
             @endforeach
@@ -32,39 +32,35 @@
 	  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalCenterTitle">Module</h5>
+	        <h5 class="modal-title" id="exampleModalCenterTitle">Carousel Image</h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
 	      </div>
 
 	      <div class="modal-body">
-	        <form method="POST" action="/setup/module" enctype="multipart/form-data" id="formdata">
+	        <form method="POST" action="/setup/users" enctype="multipart/form-data" id="formdata">
 	          <input type="hidden" name="oper" value="add">
 	          <input type="hidden" name="id">
 	          @csrf
 
 			  <div class="form-group">
-			    <label for="exampleInputEmail1">Module Image</label>
-			    <div class="input-group mb-3">
-				  <div class="input-group-prepend">
-				    <span class="input-group-text">Upload</span>
-				  </div>
-				  <div class="custom-file">
-				    <input type="file" class="custom-file-input" id="image_file" accept="image/*" name="image_file" required>
-				    <label class="custom-file-label" for="image_file">Module Image</label>
-				  </div>
-				</div>
+			    <label for="username">Username</label>
+			    <input type="text" class="form-control" id="username" name="username" placeholder="Username">
 			  </div>
 
 			  <div class="form-group">
-			    <label for="module_name">Module Name</label>
-			    <input type="text" class="form-control" id="module_name" name="module_name" placeholder="Module Name" required>
+			    <label for="password">Password</label>
+			    <input type="text" class="form-control" id="password" name="password" placeholder="Password">
 			  </div>
 
 			  <div class="form-group">
-			    <label for="module_summary">Module Summary</label>
-			    <textarea class="form-control" id="module_summary" name="module_summary" placeholder="Module Summary" rows="5" required></textarea>
+			    <label for="role">Role</label>
+			    <select class="form-control"  id="role" name="role">
+			      <option class="Admin">Admin</option>
+			      <option class="Student">Student</option>
+			      <option class="Instructor">Instructor</option>
+			    </select>
 			  </div>
 
 		      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -85,7 +81,8 @@
 
 @section('js')
 	<script src="{{ asset('js/utility.js') }}"></script>
-	<script src="{{ asset('js/module.js') }}"></script>
+	<script src="{{ asset('js/users.js') }}"></script>
 	<script src="{{ asset('asset/DataTables/datatables.min.js') }}"></script>
 	<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
 @endsection
