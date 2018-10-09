@@ -15,6 +15,9 @@
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+
+    <!-- FA Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
 
   <body>
@@ -43,10 +46,15 @@
     @endguest
 
     <header class="blog-header py-3">
-      <div class="row"><span id="top-cert">Certified by Body of Institute of Visual Informatics (IVI)</span></div>
+      <div class="row"><a href="{{$title_link}}"><span id="top-cert">{{$main_title}}</span></a></div>
       <div class="row flex-nowrap justify-content-between align-items-center">
-        <div class="col-md-4 offset-md-3"">
-          <img src="{{env('APP_URL')}}uploads/logo/logo_ukm_ivi.png">
+        <div class="col-md-4 offset-md-3">
+        <a href="{{$logo1_link}}">
+            <img src="{{$logo1}}" height="100">
+          </a>
+          <a href="{{$logo2_link}}">
+            <img src="{{$logo2}}" height="100">
+          </a>
         </div>
       </div>
     </header>
@@ -112,47 +120,46 @@
               <!-- Aktiviti starts -->
               <p></p><p></p>
               <h3 class="pb-3 mb-4 font-italic border-bottom">
-                Aktiviti 
+                {{$activity_title}}
               </h3>
               <div class="table-responsive">          
                 <table class="table table-striped">
                   <tbody>
-                    <tr>    
-                      <th>tarikh_aktiviti</th> 
-                      <th>nama_aktiviti</th>
-                      <th>masa_aktiviti</th>
-                      <th>tempat_aktiviti</th> 
-                      <th>
-                        <!-- Betulkan dekat button data-target="#aktiviti_$key}}" Double check kat project masjid-->
-                        <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#aktiviti">
-                          Details
-                        </button>
-                        <!-- The Modal -->
-                        <!-- Betulkan dekat bawah id="aktiviti_$key}}" -->
-                        <div class="modal fade" id="aktiviti">
-                          <div class="modal-dialog modal-dialog-centered modal-lg">
-                            <div class="modal-content">
-                              <!-- Modal Header -->
-                              <div class="modal-header">
-                                <h4 class="modal-title">nama_aktiviti</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                              </div>
-                              <!-- Modal body -->
-                              <div class="modal-body">
-                                <img class="center" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">   
-                                <br>
-                                <p>desc_aktiviti</p>
-                              </div>
-                              <!-- Modal footer -->
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    @foreach($activity as $key => $data)
+                      <tr>    
+                        <th>{{$data->activity_date}}</th> 
+                        <th>{{$data->activity_name}}</th>
+                        <th>{{$data->activity_time}}</th>
+                        <th>{{$data->activity_venue}}</th> 
+                        <th>
+                          <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#aktiviti_{{$key}}">
+                            Details
+                          </button>
+                          <!-- The Modal -->
+                          <div class="modal fade" id="aktiviti_{{$key}}">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                              <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                  <h4 class="modal-title">{{$data->activity_name}}</h4>
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                  <img class="center" src="{{$data->activity_image}}" alt="Card image cap" width="580">   
+                                  <br>
+                                  <p>{{$data->activity_desc}}</p>
+                                </div>
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                        <!-- The Modal End -->
-                      </th>           
-                    </tr>
+                        </th>           
+                      </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>
@@ -161,20 +168,24 @@
               <!-- Info starts -->
               <p></p><p></p>
               <h3 class="pb-3 mb-4 font-italic border-bottom">
-                Info
+                {{$info_title}}
               </h3>
-              <div class="col-md-12">
-                <div class="card flex-md-row mb-4 box-shadow h-md-250 ">
-                  <div class="card-body d-flex flex-column align-items-start">          
-                    <h3 class="mb-0">
-                      <a class="text-dark" >tajuk_makluman</a>
-                    </h3>
-                    <div class="mb-1 text-muted">tarikh_makluman</div>
-                    <p class="card-text mb-auto">isi_makluman</p>
+              @foreach($info as $key => $data)
+                <div class="col-md-12">
+                  <div class="card flex-md-row mb-4 box-shadow h-md-250 ">
+                    <div class="card-body d-flex flex-column align-items-start">          
+                      <h3 class="mb-0">
+                        <!-- <a class="text-dark" href="#">{{$data->info_name}}</a> -->
+                        <a class="text-dark" >{{$data->info_name}}</a>
+                      </h3>
+                      <div class="mb-1 text-muted">{{$data->info_date}}</div>
+                      <p class="card-text mb-auto">{{$data->info_content}}</p>
+                      <!-- <a href="#" class="btn btn-sm btn-outline-secondary">Details</a> -->
+                    </div>
+                    <img class="card-img-right flex-auto d-none d-md-block" width="180" height="230" src="{{$data->info_image}}" alt="Card image cap">
                   </div>
-                  <img class="card-img-right flex-auto d-none d-md-block" width="180" height="230" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
                 </div>
-              </div>
+              @endforeach
               <!-- Info ends -->
             </div><!-- /.blog-main -->
               
@@ -213,42 +224,53 @@
 
     <div class="row m-0">
       <div class="container">
-        <footer class="pt-4 my-md-5 pt-md-5 border-top">
-          <div class="row">
-            <div class="col-12 col-md">
-              <small class="d-block mb-3 text-muted">&copy; 2017-2018</small>
+        <!-- Footer -->
+        <footer class="page-footer font-small blue pt-4 border-top">
+          <!-- Footer Links -->
+          <div class="container-fluid text-center text-md-left">
+            <!-- Grid row -->
+            <div class="row">
+              <!-- Grid column -->
+              <div class="col-md-5 mt-md-0 mt-3">
+                <!-- Content -->
+                <h5 class="text-uppercase">{{$contact_title}}</h5>
+                <p> {{$contact_address}} </p>
+                <p>
+                  <i class="fa fa-phone mr-3"></i> {{$contact_tel}}
+                </p>
+                <p>
+                  <i class="fa fa fa-fax mr-3"></i> {{$contact_fax}}
+                </p>
+              </div>
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="col-md-2 mt-md-0 mt-3">
+              </div>
+              <!-- Grid column -->
+
+              <hr class="clearfix w-100 d-md-none pb-3">
+
+              <!-- Grid column -->
+              <div class="col-md-4 mb-md-0 mb-3">
+                <!-- Links -->
+                <h5 class="text-uppercase">Links</h5>
+                <p>{!! $links_list !!}</p>
+              </div>
+              <!-- Grid column -->
             </div>
-            <div class="col-6 col-md">
-              <h5>Features</h5>
-              <ul class="list-unstyled text-small">
-                <li><a class="text-muted" href="#">Cool stuff</a></li>
-                <li><a class="text-muted" href="#">Random feature</a></li>
-                <li><a class="text-muted" href="#">Team feature</a></li>
-                <li><a class="text-muted" href="#">Stuff for developers</a></li>
-                <li><a class="text-muted" href="#">Another one</a></li>
-                <li><a class="text-muted" href="#">Last time</a></li>
-              </ul>
-            </div>
-            <div class="col-6 col-md">
-              <h5>Resources</h5>
-              <ul class="list-unstyled text-small">
-                <li><a class="text-muted" href="#">Resource</a></li>
-                <li><a class="text-muted" href="#">Resource name</a></li>
-                <li><a class="text-muted" href="#">Another resource</a></li>
-                <li><a class="text-muted" href="#">Final resource</a></li>
-              </ul>
-            </div>
-            <div class="col-6 col-md">
-              <h5>About</h5>
-              <ul class="list-unstyled text-small">
-                <li><a class="text-muted" href="#">Team</a></li>
-                <li><a class="text-muted" href="#">Locations</a></li>
-                <li><a class="text-muted" href="#">Privacy</a></li>
-                <li><a class="text-muted" href="#">Terms</a></li>
-              </ul>
-            </div>
+            <!-- Grid row -->
           </div>
+          <!-- Footer Links -->
+
+          <!-- Copyright -->
+          <div class="footer-copyright text-center py-3">
+            © 2018 Institute of Visual Informatics Universiti Kebangsaan Malaysia
+          </div>
+          <!-- Copyright -->
+
         </footer>
+        <!-- Footer -->
       </div>
     </div>
 
@@ -283,7 +305,7 @@
                 slideScaling: 300,
                 animationSpeed: 500,
                 startIndex: 0,
-                autoplayEnabled: false,
+                autoplayEnabled: true,
                 visible: 5,
                 direction: 'rtl',
                 infinite: true,

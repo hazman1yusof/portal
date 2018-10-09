@@ -7,8 +7,10 @@ use DB;
 
 class MainController extends Controller
 {
-    public function database()
-    {
+    public function view(Request $request){ 
+        $modules = DB::table('module_master')->orderBy('id', 'asc')->get();
+        $carousels = DB::table('carousel')->orderBy('lineno', 'asc')->orderBy('id', 'asc')->get();
+        $facebook = DB::table('socmed')->where('socmed_name','=','facebook')->first();
         $logo1 = DB::table('main_page')->pluck('logo1')->first();
         $logo1_link = DB::table('main_page')->pluck('logo1_link')->first();
         $logo2 = DB::table('main_page')->pluck('logo2')->first();
@@ -30,17 +32,10 @@ class MainController extends Controller
         $contact_address = DB::table('main_page')->pluck('contact_address')->first();
         $contact_tel = DB::table('main_page')->pluck('contact_tel')->first(); 
         $contact_fax = DB::table('main_page')->pluck('contact_fax')->first(); 
-        $contact_whatsapp = DB::table('main_page')->pluck('contact_whatsapp')->first();        
+        $contact_whatsapp = DB::table('main_page')->pluck('contact_whatsapp')->first(); 
 
-        return view('main.main2', compact('logo1', 'logo1_link', 'logo2', 'logo2_link', 'main_title', 'title_link', 'module',
-         'activity_title', 'activity', 'info_title', 'info', 'social_media', 'socmed_detail', 'about_title', 'about_info', 'links_title', 
-         'links_list', 'contact_title', 'contact_address', 'contact_tel', 'contact_fax', 'contact_whatsapp'));
-    }  
-    
-    public function view(Request $request){ 
-        $modules = DB::table('module_master')->orderBy('id', 'asc')->get();
-        $carousels = DB::table('carousel')->orderBy('lineno', 'asc')->orderBy('id', 'asc')->get();
-        $facebook = DB::table('socmed')->where('socmed_name','=','facebook')->first();
-        return view('main/main',compact('carousels','modules','facebook'));
+        return view('main/main',compact('carousels','modules','facebook', 'logo1', 'logo1_link', 'logo2', 'logo2_link', 'main_title', 'title_link', 'module',
+        'activity_title', 'activity', 'info_title', 'info', 'social_media', 'socmed_detail', 'about_title', 'about_info', 'links_title', 
+        'links_list', 'contact_title', 'contact_address', 'contact_tel', 'contact_fax', 'contact_whatsapp'));
     }
 }
