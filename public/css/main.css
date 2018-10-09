@@ -165,6 +165,15 @@
     background:rgba(255,255,255,0.9);
   }
 
+  .avatar {
+    vertical-align: middle;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+  }
+  .avatar_name{
+    color: grey;
+  }
   .login-card{
     width: 15rem; position: absolute; z-index: 10; left: 10px; top: 10px;
     border: #87110e solid 1px;box-shadow: 0px 3px 7px 0 #888888;

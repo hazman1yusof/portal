@@ -46,6 +46,11 @@
     @endguest
 
     <header class="blog-header py-3">
+      @auth
+      <a href="#" class="badge badge-light ml-4" style="background-color:#f8f9fa00; color: #ced4da">
+        <img src="{{ asset('css/img_avatar.png') }}" alt="Avatar" class="avatar"> {{auth()->user()->username}}
+      </a>
+      @endauth
       <div class="row"><a href="{{$title_link}}"><span id="top-cert">{{$main_title}}</span></a></div>
       <div class="row flex-nowrap justify-content-between align-items-center">
         <div class="col-md-4 offset-md-3">
@@ -69,7 +74,7 @@
         <a class="p-2 btn" href="#">Mission</a>
         <a class="p-2 btn" href="#">Staff</a>
         <a class="p-2 btn" href="#">Module</a>
-        @auth<a class="p-2 btn btn-secondary" href="/setup/dashboard" style="color: white">User | {{auth()->user()->username}}</a>@endauth
+        @auth<a class="p-2 btn btn-secondary" href="/setup/dashboard" style="color: white">{{auth()->user()->role}}</a>@endauth
       </nav>
     </div>
     <!-- Navbar ends -->
