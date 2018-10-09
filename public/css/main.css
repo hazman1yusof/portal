@@ -166,19 +166,20 @@
   }
 
   .login-card{
-    width: 15rem; position: absolute; z-index: 10; left: 10px; top: 10px;
-    border: #87110e solid 1px;box-shadow: 0px 3px 7px 0 #888888;
+    width: 30rem; position: absolute; z-index: 10; right: 10px; top: 70px;
+    
   }
   .card-body{
-    padding: .75rem;
+    padding: .35rem;
   }
   .form-signin {
     width: 100%;
-    max-width: 330px;
+    max-width: 550px;
     margin: auto;
   }
   .form-signin .checkbox {
     font-weight: 400;
+    font-size: 1em;
   }
   .form-signin .form-control {
     position: relative;

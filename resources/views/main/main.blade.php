@@ -24,24 +24,21 @@
     <!-- header starts -->
 
     @guest
-    <div class="card m-3 d-none d-md-block login-card">
-      <div class="card-body" >
-        <form class="form-signin" method="POST" action="/login">
-          @csrf
-          <input type="text" id="username" name="username" class="form-control form-control-sm" placeholder="Username" required>
-          <input type="password" id="inputPassword" name="password" class="form-control form-control-sm" placeholder="Password" required style="margin-bottom: 5px">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="autoSizingCheck2">
-            <label class="form-check-label" for="autoSizingCheck2">
-              Remember me
-            </label>
+    <div class=" m-3 d-none d-md-block login-card">
+      <form class="form-signin" method="POST" action="/login">
+        @csrf
+        <div class="row">
+          <div class="col">
+            <input type="text" id="username" name="username" class="form-control form-control-sm" placeholder="Username" required>
           </div>
-          <div class="btn-group btn-group-sm d-flex" role="group" aria-label="Basic example">
-            <button class="btn btn-primary w-100" type="submit">Log in</button>
-            <button type="button" class="btn btn-secondary w-100">Sign up</button>
+          <div class="col">
+            <input type="password" id="inputPassword" name="password" class="form-control form-control-sm" placeholder="Password" required style="margin-bottom: 5px">
           </div>
-        </form>
-      </div>
+          <div class="d-flex" role="group" aria-label="Basic example">
+            <button class="btn btn-primary btn-sm w-100" type="submit">Log in</button>
+          </div>
+        </div>
+      </form>
     </div>
     @endguest
 
