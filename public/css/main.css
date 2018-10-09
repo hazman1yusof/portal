@@ -171,8 +171,9 @@
     height: 35px;
     border-radius: 50%;
   }
-  .avatar_name{
-    color: grey;
+  .dropdown-menu.show {
+      padding: 0;
+      font-size: 0.8rem;
   }
   .login-card{
     width: 15rem; position: absolute; z-index: 10; left: 10px; top: 10px;
