@@ -37,6 +37,9 @@ Route::prefix('setup')->group(function () {
 
     Route::get('activity', "Setup\ActivityController@view");
     Route::post('activity', "Setup\ActivityController@form");
+
+    Route::get('info', "Setup\InfoController@view");
+    Route::post('info', "Setup\InfoController@form");
 });
 
 //change carousel image to small thumbnail size

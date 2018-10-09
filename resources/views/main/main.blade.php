@@ -94,7 +94,7 @@
             <img class="card-img-top" src="{{env('APP_URL')}}uploads/{{$module->module_image}}" style="height:240px;max-width:400px" alt="Card image cap">
             <div class="card-body">
               <h3 class="card-title">{{$module->module_name}}</h3>
-              <p class="card-text">{{$module->module_summary}}</p>
+              <p class="card-text">{{str_limit($module->module_summary, 215, ' ...')}}</p>
               <a href="">Find more info</a>
             </div>
           </div>
@@ -150,6 +150,7 @@
                             </div>
                           </div>
                         </div>
+                        <!-- The Modal End -->
                       </th>           
                     </tr>
                   </tbody>
