@@ -40,6 +40,9 @@ Route::prefix('setup')->group(function () {
 
     Route::get('info', "Setup\InfoController@view");
     Route::post('info', "Setup\InfoController@form");
+
+    Route::get('socmed', "Setup\SocmedController@view");
+    Route::post('socmed', "Setup\SocmedController@form");
 });
 
 //change carousel image to small thumbnail size

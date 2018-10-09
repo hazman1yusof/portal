@@ -15,8 +15,8 @@ class InfoController extends Controller{
     }
 
     public function view(Request $request){ 
-        $caras = DB::table('carousel')->orderBy('lineno', 'desc')->orderBy('id', 'desc')->get();
-        return view('setup/carousel',compact('caras'));
+        $infos = DB::table('info_detail')->orderBy('id', 'desc')->get();
+        return view('setup/info',compact('infos'));
     }
 
     public function form(Request $request){
@@ -36,14 +36,14 @@ class InfoController extends Controller{
         DB::beginTransaction();
         try { 
 
-        	$carousel_path = $request->file('image_file')->store('carousel', 'public_uploads');
+        	$info_image = $request->file('info_image')->store('info', 'public_uploads');
 
-        	DB::table('carousel')
+        	DB::table('info_image')
         		->insert([
-        			'lineno' => $request->lineno,
-        			'carousel_path' => $carousel_path,
-        			'carousel_text' => $request->carousel_text,
-        			'active' => !empty($request->active)
+        			'info_name' => $request->info_name,
+        			'info_date' => $request->info_date,
+                    'info_content' => $request->info_content,
+                    'info_image' => $info_image,
         		]);
 
         	DB::commit();
@@ -63,27 +63,22 @@ class InfoController extends Controller{
     	DB::beginTransaction();
         try { 
 
-        	$carousel = DB::table('carousel')->where('id','=',$request->id);
+            $array_update = [
+                'info_name' => $request->info_name,
+                'info_date' => $request->info_date,
+                'info_content' => $request->info_content
+            ];
 
-        	if(!empty($request->file('image_file'))){
-				File::delete('uploads/'.$carousel->first()->carousel_path);
-        		$carousel_path = $request->file('image_file')->store('carousel', 'public_uploads');
+        	$info = DB::table('info_detail')->where('id','=',$request->id);
 
-				$carousel
-	        		->update([
-	        			'lineno' => $request->lineno,
-	        			'carousel_path' => $carousel_path,
-	        			'carousel_text' => $request->carousel_text,
-	        			'active' => !empty($request->active)
-	        		]);
-        	}else{
-        		$carousel
-	        		->update([
-	        			'lineno' => $request->lineno,
-	        			'carousel_text' => $request->carousel_text,
-	        			'active' => !empty($request->active)
-	        		]);
-        	}
+        	if(!empty($request->file('info_image'))){
+				File::delete('uploads/'.$info->first()->info_image);
+        		$info_image = $request->file('info_image')->store('info', 'public_uploads');
+                $array_update['info_image'] = $info_image;
+            }
+
+    		$info
+        		->update($array_update);
 
         	DB::commit();
 
@@ -101,12 +96,11 @@ class InfoController extends Controller{
     	DB::beginTransaction();
         try { 
 
-        	$carousel = DB::table('carousel')
-	    					->where('id','=',$request->id);
+            $info = DB::table('info_detail')->where('id','=',$request->id);
 
-			File::delete('uploads/'.$carousel->first()->carousel_path);
+            File::delete('uploads/'.$info->first()->info_image);
 
-    		$carousel->delete();
+    		$info->delete();
 
         	DB::commit();
 

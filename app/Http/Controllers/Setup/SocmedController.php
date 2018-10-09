@@ -9,14 +9,14 @@ use Storage;
 use Image;
 use File;
 
-class ActivityController extends Controller{
+class SocmedController extends Controller{
 	public function __construct(){
         $this->middleware('auth');
     }
 
     public function view(Request $request){ 
-        $activities = DB::table('activity_detail')->orderBy('id', 'desc')->get();
-        return view('setup/activity',compact('activities'));
+        $socmeds = DB::table('socmed')->orderBy('id', 'desc')->get();
+        return view('setup/socmed',compact('socmeds'));
     }
 
     public function form(Request $request){
@@ -36,16 +36,10 @@ class ActivityController extends Controller{
         DB::beginTransaction();
         try { 
 
-        	$activity_image = $request->file('activity_image')->store('activity', 'public_uploads');
-
-        	DB::table('activity_detail')
+        	DB::table('socmed')
         		->insert([
-                    'activity_date' => $request->activity_date,
-                    'activity_name' => $request->activity_name,
-                    'activity_time' => $request->activity_time,
-                    'activity_venue' => $request->activity_venue,
-                    'activity_image' => $activity_image,
-                    'activity_desc' => $request->activity_desc
+        			'socmed_name' => $request->socmed_name,
+        			'socmed_desc' => $request->socmed_desc,
         		]);
 
         	DB::commit();
@@ -65,22 +59,14 @@ class ActivityController extends Controller{
     	DB::beginTransaction();
         try { 
 
-        	$activity_detail = DB::table('activity_detail')->where('id','=',$request->id);
             $array_update = [
-                'activity_date' => $request->activity_date,
-                'activity_name' => $request->activity_name,
-                'activity_time' => $request->activity_time,
-                'activity_venue' => $request->activity_venue,
-                'activity_desc' => $request->activity_desc
+                'socmed_name' => $request->socmed_name,
+                'socmed_desc' => $request->socmed_desc,
             ];
 
-        	if(!empty($request->file('activity_image'))){
-				File::delete('uploads/'.$activity_detail->first()->activity_image);
-        		$activity_image = $request->file('activity_image')->store('activity', 'public_uploads');
-                $array_update['activity_image'] = $activity_image;
-            }
+        	$socmed = DB::table('socmed')->where('id','=',$request->id);
 
-    		$activity_detail
+    		$socmed
         		->update($array_update);
 
         	DB::commit();
@@ -99,11 +85,9 @@ class ActivityController extends Controller{
     	DB::beginTransaction();
         try { 
 
-            $activity_detail = DB::table('activity_detail')->where('id','=',$request->id);
+            $socmed = DB::table('socmed')->where('id','=',$request->id);
 
-			File::delete('uploads/'.$activity_detail->first()->activity_image);
-
-    		$activity_detail->delete();
+    		$socmed->delete();
 
         	DB::commit();
 

@@ -32,10 +32,10 @@
             <input type="text" id="username" name="username" class="form-control form-control-sm" placeholder="Username" required>
           </div>
           <div class="col">
-            <input type="password" id="inputPassword" name="password" class="form-control form-control-sm" placeholder="Password" required style="margin-bottom: 5px">
+            <input type="password" id="inputPassword" name="password" class="form-control form-control-sm" placeholder="Password" required>
           </div>
-          <div class="d-flex" role="group" aria-label="Basic example">
-            <button class="btn btn-primary btn-sm w-100" type="submit">Log in</button>
+          <div class="col">
+            <button class="btn btn-primary btn-sm" type="submit">Log in</button>
           </div>
         </div>
       </form>
@@ -43,21 +43,24 @@
     @endguest
 
     <header class="blog-header py-3">
-      @auth
-      <div class="dropdown">
-        <a href="#" class="badge badge-light ml-4" style="background-color:#f8f9fa00; color: #ced4da" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <img src="{{ asset('css/img_avatar.png') }}" alt="Avatar" class="avatar"> {{auth()->user()->username}}
-        </a>
+      <a href="{{$title_link}}"><span id="top-cert">{{$main_title}}</span></a>
 
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" href="#">My Profile</a>
-          <a class="dropdown-item" href="/logout">Sign Out</a>
+      <div class="row mx-0">
+
+        <div class="dropdown col-md-2">
+        @auth
+          <a href="#" class="badge badge-light ml-4" style="background-color:#f8f9fa00; color: #ced4da" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="{{ asset('css/img_avatar.png') }}" alt="Avatar" class="avatar"> {{auth()->user()->username}}
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#">My Profile</a>
+            <a class="dropdown-item" href="/logout">Sign Out</a>
+          </div>
+        @endauth
         </div>
-      </div>
-      @endauth
-      <div class="row"><a href="{{$title_link}}"><span id="top-cert">{{$main_title}}</span></a></div>
-      <div class="row flex-nowrap justify-content-between align-items-center">
-        <div class="col-md-4 offset-md-3">
+
+        <div class="col-md-4">
         <a href="{{$logo1_link}}">
             <img src="{{$logo1}}" height="100">
           </a>
@@ -66,6 +69,7 @@
           </a>
         </div>
       </div>
+
     </header>
     <!-- header ends -->
 
@@ -155,7 +159,7 @@
                                 </div>
                                 <!-- Modal body -->
                                 <div class="modal-body">
-                                  <img class="center" src="{{$data->activity_image}}" alt="Card image cap" width="580">   
+                                  <img class="center" src="{{env('APP_URL')}}uploads/{{$data->activity_image}}" alt="Card image cap" width="350">   
                                   <br>
                                   <p>{{$data->activity_desc}}</p>
                                 </div>
@@ -188,10 +192,10 @@
                         <a class="text-dark" >{{$data->info_name}}</a>
                       </h3>
                       <div class="mb-1 text-muted">{{$data->info_date}}</div>
-                      <p class="card-text mb-auto">{{$data->info_content}}</p>
+                      <p class="card-text mb-auto">{{str_limit($data->info_content, 215, ' ...')}}</p>
                       <!-- <a href="#" class="btn btn-sm btn-outline-secondary">Details</a> -->
                     </div>
-                    <img class="card-img-right flex-auto d-none d-md-block" width="180" height="230" src="{{$data->info_image}}" alt="Card image cap">
+                    <img class="card-img-right flex-auto d-none d-md-block" width="180" height="230" src="{{env('APP_URL')}}uploads/{{$data->info_image}}" alt="Card image cap">
                   </div>
                 </div>
               @endforeach

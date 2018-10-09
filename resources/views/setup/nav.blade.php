@@ -47,6 +47,18 @@
               Activity
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link {{ Request::is('setup/info') ? 'active' : '' }}" href="/setup/info">
+              <span data-feather="book"></span>
+              Info
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{ Request::is('setup/socmed') ? 'active' : '' }}" href="/setup/socmed">
+              <span data-feather="facebook"></span>
+              Social Media
+            </a>
+          </li>
         </ul>
         <hr>
 
