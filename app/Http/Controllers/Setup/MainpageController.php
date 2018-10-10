@@ -15,8 +15,15 @@ class MainpageController extends Controller{
     }
 
     public function view(Request $request){ 
-        $caras = DB::table('carousel')->orderBy('lineno', 'desc')->orderBy('id', 'desc')->get();
-        return view('setup/mainpage',compact('caras'));
+        $exist = DB::table('main_page')->count();
+        if($exist){
+            $oper = 'edit';
+        }else{
+            $oper = 'add';
+        }
+
+        $mainpage = DB::table('main_page')->first();
+        return view('setup/mainpage',compact('mainpage','oper'));
     }
 
     public function form(Request $request){
@@ -25,8 +32,6 @@ class MainpageController extends Controller{
                 return $this->add($request);
             case 'edit':
                 return $this->edit($request);
-            case 'del':
-                return $this->del($request);
             default:
                 return 'error happen..';
         }
@@ -36,14 +41,31 @@ class MainpageController extends Controller{
         DB::beginTransaction();
         try { 
 
-        	$carousel_path = $request->file('image_file')->store('carousel', 'public_uploads');
+        	$logo1_path = $request->file('logo1')->store('logo', 'public_uploads');
+            $logo2_path = $request->file('logo2')->store('logo', 'public_uploads');
 
         	DB::table('carousel')
         		->insert([
-        			'lineno' => $request->lineno,
-        			'carousel_path' => $carousel_path,
-        			'carousel_text' => $request->carousel_text,
-        			'active' => !empty($request->active)
+        			'logo1' => $logo1_path,
+        			'logo1_link' => $request->logo1_link,
+        			'logo2' => $logo2_path,
+        			'logo2_link' => $request->logo2_link,
+                    'main_title' => $request->main_title ,
+                    'title_link' => $request->title_link ,
+                    'activity_title' => $request->activity_title ,
+                    'info_title' => $request->info_title ,
+                    'social_media' => $request->social_media ,
+                    'about_title' => $request->about_title ,
+                    'about_info' => $request->about_info ,
+                    'links_title' => $request->links_title ,
+                    'links_list' => $request->links_list ,
+                    'contact_title' => $request->contact_title ,
+                    'contact_address' => $request->contact_address ,
+                    'contact_tel' => $request->contact_tel ,
+                    'contact_fax' => $request->contact_fax ,
+                    'contact_whatsapp' => $request->contact_whatsapp ,
+                    'footer1' => $request->footer1 ,
+                    'footer2' => $request->footer2
         		]);
 
         	DB::commit();
@@ -63,50 +85,43 @@ class MainpageController extends Controller{
     	DB::beginTransaction();
         try { 
 
-        	$carousel = DB::table('carousel')->where('id','=',$request->id);
+            $array_edit = [
+                'logo1_link' => $request->logo1_link,
+                'logo2_link' => $request->logo2_link,
+                'main_title' => $request->main_title ,
+                'title_link' => $request->title_link ,
+                'activity_title' => $request->activity_title ,
+                'info_title' => $request->info_title ,
+                'social_media' => $request->social_media ,
+                'about_title' => $request->about_title ,
+                'about_info' => $request->about_info ,
+                'links_title' => $request->links_title ,
+                'links_list' => $request->links_list ,
+                'contact_title' => $request->contact_title ,
+                'contact_address' => $request->contact_address ,
+                'contact_tel' => $request->contact_tel ,
+                'contact_fax' => $request->contact_fax ,
+                'contact_whatsapp' => $request->contact_whatsapp ,
+                'footer1' => $request->footer1 ,
+                'footer2' => $request->footer2
+            ];
 
-        	if(!empty($request->file('image_file'))){
-				File::delete('uploads/'.$carousel->first()->carousel_path);
-        		$carousel_path = $request->file('image_file')->store('carousel', 'public_uploads');
+        	$mainpage = DB::table('main_page')->where('id','=',$request->id);
 
-				$carousel
-	        		->update([
-	        			'lineno' => $request->lineno,
-	        			'carousel_path' => $carousel_path,
-	        			'carousel_text' => $request->carousel_text,
-	        			'active' => !empty($request->active)
-	        		]);
-        	}else{
-        		$carousel
-	        		->update([
-	        			'lineno' => $request->lineno,
-	        			'carousel_text' => $request->carousel_text,
-	        			'active' => !empty($request->active)
-	        		]);
-        	}
+        	if(!empty($request->file('logo1'))){
+				File::delete('uploads/'.$mainpage->first()->logo1);
+                $logo1_path = $request->file('logo1')->store('logo', 'public_uploads');
+                $array_edit['logo1'] =  $logo1_path;
+            }
 
-        	DB::commit();
-
-        	return redirect()->back();
-
-        } catch (Exception $e) {
-            DB::rollback();
-            report($e);
-
-            return response('Error'.$e, 500);
-        }
-    }
-
-    public function del(Request $request){
-    	DB::beginTransaction();
-        try { 
-
-        	$carousel = DB::table('carousel')
-	    					->where('id','=',$request->id);
-
-			File::delete('uploads/'.$carousel->first()->carousel_path);
-
-    		$carousel->delete();
+            if(!empty($request->file('logo2'))){
+                File::delete('uploads/'.$mainpage->first()->logo2);
+                $logo2_path = $request->file('logo2')->store('logo', 'public_uploads');
+                $array_edit['logo2'] =  $logo2_path;
+            }
+				
+    		$mainpage
+        		->update($array_edit);
 
         	DB::commit();
 
@@ -119,4 +134,5 @@ class MainpageController extends Controller{
             return response('Error'.$e, 500);
         }
     }
+
 }

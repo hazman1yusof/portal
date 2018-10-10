@@ -59,10 +59,10 @@
       <div class="row flex-nowrap justify-content-between align-items-center">
         <div class="col-md-4 offset-md-3">
         <a href="{{$logo1_link}}">
-            <img src="{{$logo1}}" height="100">
+            <img src="env('APP_URL')}}uploads/{{$logo1}}" height="100">
           </a>
           <a href="{{$logo2_link}}">
-            <img src="{{$logo2}}" height="100">
+            <img src="env('APP_URL')}}uploads/{{$logo2}}" height="100">
           </a>
         </div>
       </div>
