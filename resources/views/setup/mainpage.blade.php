@@ -21,7 +21,7 @@
 		  </div>
 		  <div class="custom-file">
 		    <input type="file" class="custom-file-input" id="logo1" accept="image/*" name="logo1">
-		    <label class="custom-file-label" for="logo1">Choose file</label>
+		    <label class="custom-file-label" for="logo1">{{$mainpage->logo1}}</label>
 		  </div>
 		</div>
 	    <input type="text" class="form-control" id="logo1_link" name="logo1_link" placeholder="Logo 1 Link" value="{{$mainpage->logo1_link}}">
@@ -35,7 +35,7 @@
 		  </div>
 		  <div class="custom-file">
 		    <input type="file" class="custom-file-input" id="logo2" accept="image/*" name="logo2">
-		    <label class="custom-file-label" for="logo2">Choose file</label>
+		    <label class="custom-file-label" for="logo2">{{$mainpage->logo2}}</label>
 		  </div>
 		</div>
 	    <input type="text" class="form-control" id="logo2_link" name="logo2_link" placeholder="Logo 2 Link" value="{{$mainpage->logo2_link}}">
@@ -70,12 +70,12 @@
 	  <div class="form-group">
 	  	<div class="row">
 	  	  <div class="col">
-		    <label for="about_title">About Title</label>
+		    <label for="about_title">Contact Title</label>
 		    <input type="text" class="form-control" id="about_title" name="about_title" placeholder="About Title" value="{{$mainpage->about_title}}">
 		  </div>
 	  	  <div class="col">
-		    <label for="about_info">About Info</label>
-		    <input type="text" class="form-control" id="about_info" name="about_info" placeholder="About Info" value="{{$mainpage->about_info}}">
+		    <label for="contact_title">Contact Title</label>
+		    <input type="text" class="form-control" id="contact_title" name="contact_title" placeholder="About Info" value="{{$mainpage->contact_title}}">
 		  </div>
 		</div>
 	  </div>
@@ -90,15 +90,15 @@
 	  </div>
 
 	  <div class="form-group">
-	    <label for="links_list">Links Title</label>
-	    <textarea class="form-control" id="links_list" name="links_list" placeholder="Links List" rows=4 value="{{$mainpage->links_list}}"></textarea>
+	    <label for="links_list">Links List</label>
+	    <textarea class="form-control" id="links_list" name="links_list" placeholder="Links List" rows=4 >{{$mainpage->links_list}}</textarea>
 	  </div>
 
 	  <hr>
 
 	  <div class="form-group">
 	    <label for="contact_address">Contact Address</label>
-	    <textarea class="form-control" id="contact_address" name="contact_address" placeholder="Contact Address" rows=4 value="{{$mainpage->contact_address}}"></textarea>
+	    <textarea class="form-control" id="contact_address" name="contact_address" placeholder="Contact Address" rows=4>{{$mainpage->contact_address}}</textarea>
 	  </div>
 
 	  <div class="form-group">

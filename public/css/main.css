@@ -63,6 +63,10 @@
     margin: 10px;
     border: 1px solid rgb(99, 97, 97);
   }
+  .modal-p {
+    font-weight: 200;
+    line-height: 1;
+  }
 
   /* header */
 
@@ -176,11 +180,12 @@
       font-size: 0.8rem;
   }
   .login-card{
-    width: 30rem; position: absolute; z-index: 10; right: 10px; top: 70px;
+    width: 30rem; position: absolute; z-index: 10; right: 10px; top: 50px;
     
   }
   .card-body{
-    padding: .35rem;
+    padding: 1.55rem;
+    font-size: 0.95rem;
   }
   .form-signin {
     width: 100%;

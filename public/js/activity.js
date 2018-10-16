@@ -6,17 +6,17 @@ $(document).ready(function() {
     	select: 'single', 
         order: [[ 0, 'desc' ]],
         columnDefs: [
-        	{ name: 'id', targets: 0, width: "10%"},
-        	{ name: 'activity_name', targets: 1, width: "20%"},
-		    { name: 'activity_date', targets: 2 , width: "10%"},
-		    { name: 'activity_time', targets: 3 , width: "10%"},
-		    { name: 'activity_venue', targets: 4 , width: "10%"},
+        	{ name: 'id', targets: 0, width: "5%"},
+        	{ name: 'activity_name', targets: 1, width: "5%"},
+		    { name: 'activity_date', targets: 2 , width: "5%"},
+		    { name: 'activity_time', targets: 3 , width: "5%"},
+		    { name: 'activity_venue', targets: 4 , width: "5%"},
 		    { name: 'activity_image', targets: 5,
 		      render: function(data, type, row, meta) {
 		        return '<img src="'+data+'">'
 		      }
 		    },
-        	{ name: 'carousel_text', targets: 6, width: "40%"},
+        	{ name: 'carousel_text', targets: 6, width: "60%"},
         	{ name: 'action', targets: 7, width: "10%", "data": null,
 		      render: function(data, type, row, meta) {
 		        return `

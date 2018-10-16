@@ -62,10 +62,10 @@
 
         <div class="col-md-4">
         <a href="{{$logo1_link}}">
-            <img src="env('APP_URL')}}uploads/{{$logo1}}" height="100">
+            <img src="{{env('APP_URL')}}uploads/{{$logo1}}" height="80">
           </a>
           <a href="{{$logo2_link}}">
-            <img src="env('APP_URL')}}uploads/{{$logo2}}" height="100">
+            <img src="{{env('APP_URL')}}uploads/{{$logo2}}" height="80">
           </a>
         </div>
       </div>
@@ -159,9 +159,14 @@
                                 </div>
                                 <!-- Modal body -->
                                 <div class="modal-body">
-                                  <img class="center" src="{{env('APP_URL')}}uploads/{{$data->activity_image}}" alt="Card image cap" width="350">   
-                                  <br>
-                                  <p>{{$data->activity_desc}}</p>
+                                  <div class="text-center mb-4">
+                                    <img class="center" src="{{env('APP_URL')}}uploads/{{$data->activity_image}}" alt="Card image cap" width="350"> 
+                                  </div>
+                                  <span class="modal-p">
+
+                                    {!!nl2br($data->activity_desc)!!}
+
+                                  </span>
                                 </div>
                                 <!-- Modal footer -->
                                 <div class="modal-footer">
@@ -195,7 +200,7 @@
                       <p class="card-text mb-auto">{{str_limit($data->info_content, 215, ' ...')}}</p>
                       <!-- <a href="#" class="btn btn-sm btn-outline-secondary">Details</a> -->
                     </div>
-                    <img class="card-img-right flex-auto d-none d-md-block" width="180" height="230" src="{{env('APP_URL')}}uploads/{{$data->info_image}}" alt="Card image cap">
+                    <img class="card-img-right flex-auto d-none d-md-block" width="250" height="200" src="{{env('APP_URL')}}uploads/{{$data->info_image}}" alt="Card image cap">
                   </div>
                 </div>
               @endforeach
@@ -267,8 +272,8 @@
               <!-- Grid column -->
               <div class="col-md-4 mb-md-0 mb-3">
                 <!-- Links -->
-                <h5 class="text-uppercase">Links</h5>
-                <p>{!! $links_list !!}</p>
+                <h5 class="text-uppercase">{{$links_title}}</h5>
+                {!! $links_list !!}
               </div>
               <!-- Grid column -->
             </div>
@@ -278,7 +283,7 @@
 
           <!-- Copyright -->
           <div class="footer-copyright text-center py-3">
-            © 2018 Institute of Visual Informatics Universiti Kebangsaan Malaysia
+            {{ $footer1 }}
           </div>
           <!-- Copyright -->
 
@@ -311,7 +316,7 @@
             data: {
                 carouselControls: true,
                 slideWidth: 820,
-                slideHeight: 461,
+                slideHeight: 431,
                 slideBorder: 1,
                 slideSpace: 240,
                 slidePerspective: 35,

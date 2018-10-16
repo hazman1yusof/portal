@@ -33,9 +33,10 @@ class MainController extends Controller
         $contact_tel = DB::table('main_page')->pluck('contact_tel')->first(); 
         $contact_fax = DB::table('main_page')->pluck('contact_fax')->first(); 
         $contact_whatsapp = DB::table('main_page')->pluck('contact_whatsapp')->first(); 
+        $footer1 = DB::table('main_page')->pluck('footer1')->first(); 
 
         return view('main/main',compact('carousels','modules','facebook', 'logo1', 'logo1_link', 'logo2', 'logo2_link', 'main_title', 'title_link', 'module',
         'activity_title', 'activity', 'info_title', 'info', 'social_media', 'socmed_detail', 'about_title', 'about_info', 'links_title', 
-        'links_list', 'contact_title', 'contact_address', 'contact_tel', 'contact_fax', 'contact_whatsapp'));
+        'links_list', 'contact_title', 'contact_address', 'contact_tel', 'contact_fax', 'contact_whatsapp', 'footer1'));
     }
 }
